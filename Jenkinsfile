@@ -1,5 +1,5 @@
 node {
-    def WORKSPACE = "/var/lib/jenkins/workspace/"
+    def WORKSPACE = "/var/lib/jenkins/workspace/tesraildanamon"
     def dockerImageTag = "tesraildanamon${env.BUILD_NUMBER}"
 
 try{
@@ -12,7 +12,7 @@ try{
             branch: 'main'
      }
       stage('Build docker') {
-             dockerImage = docker build -t ("tesraildanamon:${env.BUILD_NUMBER}")
+             dockerImage = docker.build("tesraildanamon:${env.BUILD_NUMBER}")
       }
 
       stage('Deploy docker'){
