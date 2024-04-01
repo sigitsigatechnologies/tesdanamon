@@ -1,5 +1,5 @@
 node {
-def dockerImageTag = "tesraildanamon${env.BUILD_NUMBER}"
+def dockerImageTag = "dockertes${env.BUILD_NUMBER}"
 try{
     notifyBuild('STARTED')
     stage('Clone Repo') {
@@ -10,12 +10,12 @@ try{
             branch: 'main'
      }
     stage('Build docker') {
-         dockerImage = docker.build("tesraildanamon:${env.BUILD_NUMBER}")
+         dockerImage = docker.build("dockertes:${env.BUILD_NUMBER}")
     }
     stage('Deploy docker'){
           echo "Docker Image Tag Name: ${dockerImageTag}"
-          sh "docker stop tesraildanamon || true && docker rm tesraildanamon || true"
-          sh "docker run --name tesraildanamon -d -p 8081:8081 tesraildanamon:${env.BUILD_NUMBER}"
+          sh "docker stop dockertes || true && docker rm dockertes || true"
+          sh "docker run --name dockertes -d -p 8081:8081 dockertes:${env.BUILD_NUMBER}"
     }
 }catch(e){
     currentBuild.result = "FAILED"
