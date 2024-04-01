@@ -1,4 +1,5 @@
 node {
+def dockerImageTag = "tesraildanamon${env.BUILD_NUMBER}"
 try{
     notifyBuild('STARTED')
     stage('Clone Repo') {
