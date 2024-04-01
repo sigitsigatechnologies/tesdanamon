@@ -1,31 +1,11 @@
-node {
-
-    stage('Initialize')
-    {
-        def dockerHome = tool 'MyDocker'
-        def mavenHome  = tool 'MyMaven'
-        env.PATH = "${dockerHome}/bin:${mavenHome}/bin:${env.PATH}"
+pipeline {
+    agent { docker { image 'tesraildanamon' } }
+      stages {
+        stage('log version info') {
+      steps {
+        sh 'mvn --version'
+        sh 'mvn clean install'
+      }
     }
-
-    stage('Checkout')
-    {
-        checkout scm
-    }
-
-      stage('Build')
-           {
-            sh 'uname -a'
-            sh 'mvn -B -DskipTests clean package'
-          }
-
-        stage('Test')
-        {
-            //sh 'mvn test'
-            sh 'ifconfig'
-        }
-
-        stage('Deliver')
-          {
-                sh 'bash ./jenkins/deliver.sh'
-        }
+  }
 }
