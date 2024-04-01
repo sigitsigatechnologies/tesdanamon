@@ -1,7 +1,7 @@
 FROM openjdk:11-jdk
-VOLUME /tmp
+VOLUME /tes
 LABEL maintainer="sigit galih f"
-WORKDIR /opt/app
-COPY target/tes-0.0.1-SNAPSHOT.jar dockertes.jar
+WORKDIR /tes
+COPY target/tes-0.0.1-SNAPSHOT.jar tesraildanamon.jar
 EXPOSE 8081
-ENTRYPOINT exec java -jar dockertes.jar
+ENTRYPOINT exec java -jar tesraildanamon.jar
