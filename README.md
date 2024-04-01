@@ -8,4 +8,4 @@
 7. Add Dockerfile.
 8. Create project repo gitlab.
 9. Create job chose pipeline project.
-10. Build Project. 
+10. Build Project.
