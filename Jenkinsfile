@@ -44,12 +44,4 @@ def notifyBuild(String buildStatus = 'STARTED'){
     <p>Job: ${env.JOB_NAME} - Deployment Sequence: [${env.BUILD_NUMBER}] - Time: ${now}</p>
     <p>Check console output at "<a href="${env.BUILD_URL}">${env.JOB_NAME}</a>"</p>"""
 
-
-  // Email notification
-    emailext (
-         to: "sigit.fatuhrahman@gmail.com",
-         subject: subject_email,
-         body: details,
-         recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-       )
 }
