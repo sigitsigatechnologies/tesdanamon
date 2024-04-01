@@ -1,24 +1,24 @@
 node {
-    def WORKSPACE = "/var/lib/jenkins/workspace/springboot-deploy"
-    def dockerImageTag = "springboot-deploy${env.BUILD_NUMBER}"
+    def WORKSPACE = "/var/lib/jenkins/workspace/tesraildanamon"
+    def dockerImageTag = "tesraildanamon${env.BUILD_NUMBER}"
 
 try{
      notifyBuild('STARTED')
      stage('Clone Repo') {
         // for display purposes
         // Get some code from a GitHub repository
-        git url: 'https://gitlab.com/gpranataAsyst/springboot-demodeploy.git',
-            credentialsId: 'springdeploy-user',
+        git url: 'https://github.com/sigitsigatechnologies/tesdanamon.git',
+            credentialsId: 'sigitsigatechnologies',
             branch: 'main'
      }
       stage('Build docker') {
-             dockerImage = docker.build("springboot-deploy:${env.BUILD_NUMBER}")
+             dockerImage = docker.build("tesraildanamon:${env.BUILD_NUMBER}")
       }
 
       stage('Deploy docker'){
               echo "Docker Image Tag Name: ${dockerImageTag}"
-              sh "docker stop springboot-deploy || true && docker rm springboot-deploy || true"
-              sh "docker run --name springboot-deploy -d -p 8081:8081 springboot-deploy:${env.BUILD_NUMBER}"
+              sh "docker stop tesraildanamon || true && docker rm tesraildanamon || true"
+              sh "docker run --name tesraildanamon -d -p 8081:8081 tesraildanamon:${env.BUILD_NUMBER}"
       }
 }catch(e){
     currentBuild.result = "FAILED"
@@ -47,7 +47,7 @@ def notifyBuild(String buildStatus = 'STARTED'){
 
   // Email notification
     emailext (
-         to: "admin@gmail.com",
+         to: "sigit.fatuhrahman@gmail.com",
          subject: subject_email,
          body: details,
          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
